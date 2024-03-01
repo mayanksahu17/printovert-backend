@@ -132,14 +132,14 @@ const addwalletamount = asyncHandler(async (req, res) => {
   
       await user.save();
 
-      const wallet = await wallet.findById(requestId)
-      const transectionId = wallet.transectionId
+      const Wallet = await wallet.findById(requestId)
+      const transectionId = Wallet.transectionId
       
       const transaction = await Transection.findById(transectionId)
 
       transaction.Status = "Success";
       transaction.response = "Success";
-      transaction.response = "true";
+      transaction.response = "Success";
 
       await transaction.save()
 
