@@ -107,7 +107,7 @@ const UpdateProduct = asyncHandler(async (req, res) => {
 
 
         user.walletBalance = user.walletBalance - price*quantity
-        user.spent = price*quantity
+        user.spent = user.spent + price*quantity
         await product.save()
         await user.save();  
     
