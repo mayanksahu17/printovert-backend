@@ -420,10 +420,6 @@ const addWalletBalance = asyncHandler(async (req, res) => {
       throw new ApiError(404, "User not found");
     }
 
-    // Create a new wallet request
-    const walletRequest = await wallet.create({ amount, image, userId: userId.toString() });
-
-
     const newTransaction = await Transection.create({
       amount: amount,
       Status: "Pending",
@@ -432,6 +428,12 @@ const addWalletBalance = asyncHandler(async (req, res) => {
       deliveryCompany: "Admin",
   });
   
+
+    // Create a new wallet request
+    const walletRequest = await wallet.create({ amount, image, userId: userId.toString(), transectionId : newTransaction._id });
+
+
+   
   user.Transection.push(newTransaction._id);
   await user.save();
 

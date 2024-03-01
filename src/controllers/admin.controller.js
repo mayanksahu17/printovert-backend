@@ -127,10 +127,24 @@ const addwalletamount = asyncHandler(async (req, res) => {
       } 
       if(  !user.walletBalance) {  user.walletBalance = 0}
       user.walletBalance =  user.walletBalance +  amount; 
+
+      
   
       await user.save();
 
+      const wallet = await wallet.findById(requestId)
+      const transectionId = wallet.transectionId
+      
+      const transaction = await Transection.findById(transectionId)
+
+      transaction.Status = "Success";
+      transaction.response = "Success";
+      transaction.response = "true";
+
+      await transaction.save()
+
       const deletedRequested = await wallet.deleteOne({_id : requestId}) 
+
   
       res.json(new ApiResponse(200, `Wallet amount added successfully. New balance: ${user.walletBalance}`));
     } catch (error) {
