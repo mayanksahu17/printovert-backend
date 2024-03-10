@@ -15,10 +15,9 @@ const generateAccessTokenandRefreshTocken = async(userId)=>{
       throw new ApiError(404, 'user not found');
     }
      const accessToken = user.generateAccessToken()
-     console.log("accessToken : ", accessToken);
      
      const refreshToken = user.generateRefreshToken()
-     console.log("refreshToken : ", refreshToken);
+    
      
 
      user.refreshToken = refreshToken
@@ -91,8 +90,9 @@ const loginUser = asyncHandler(async(req,res)=>{
   if (!isCorrect) {
     throw new ApiError(401, "Invalid user credencials ")
   }
-  const {refreshToken , accessToken} = generateAccessTokenandRefreshTocken(user._id)
-  // console.log(accessToken);
+  const {accessToken , refreshToken} = await  generateAccessTokenandRefreshTocken(user._id)
+
+
   const loggedInUser = await  User.findById(user._id).select("-refeshToken -password")
 
   const options = {
