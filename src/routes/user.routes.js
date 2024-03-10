@@ -63,6 +63,9 @@ router.route("/:id/create-ticket").post(createTicket);
 
 router.route("/:id/wallet/request").post(addWalletBalance)
 
+router.route("/current-user").get(verifyJWT, getCurrentUser)
+
+
 
 
 
