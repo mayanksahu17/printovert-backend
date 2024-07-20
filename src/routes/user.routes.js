@@ -13,12 +13,13 @@ import {
     getAllImages,
     getAllUserTransactions,
     getAllOrderedProducts,
-    libraryImage
+    libraryImage,
+    
 } from '../controllers/user.controller.js'
  import {  getAllUserTickets  ,  createTicket} from '../controllers/ticket.controller.js'
 import {upload} from '../middleware/multer.middleware.js'
 import {verifyJWT } from '../middleware/auth.middleware.js'
-
+import { uploadImageOutService} from '../OutServices/cloudImageService.js'
 const router = Router()
 
 router.route('/login').post(loginUser)
@@ -43,11 +44,7 @@ router.route("/credencials").get(getUserCredencials)
 router.route("/:id/update-account").patch(updateAccountDetails)
 
 router.route("/image/:id").post(upload.fields([{ name: "Image", maxCount: 1 }]), uploadImage);
-// router.route("/image/:id").get((req,res)=>{
 
-//     const id= req.params.id;
-//     res.send("api works  with param : "+id)
-// })
 
 router.route("/:id/upload/library/image").post(upload.fields([{ name: "Image", maxCount: 1 }]),libraryImage)
 
@@ -66,7 +63,9 @@ router.route("/:id/wallet/request").post(addWalletBalance)
 router.route("/current-user").get(verifyJWT, getCurrentUser)
 
 
+// service routes 
 
+router.route('/cloudinary/v2/upload/outService').post(upload.fields([{ name: "Image", maxCount: 1 }]), uploadImageOutService);
 
 
 

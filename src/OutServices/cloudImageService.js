@@ -1,16 +1,13 @@
-import { uploadOnCloudinary } from "../utils/cloudinary";
-import { ApiError } from "../utils/ApiError";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
-const uploadImage = asyncHandler(async (req, res) => {
+export const uploadImageOutService = asyncHandler(async (req, res) => {
     try {
      
+      
       if (!req.files?.Image[0]?.path) {
-        return res.status(300).json({
-            success : false ,
-            data : null,
-            message : "No image found"
-        })
-    }
+        console.log("file leke ao bhai ");
+      }
       const imageLocalPath = req.files?.Image[0]?.path;
       console.log(imageLocalPath);
       if (!imageLocalPath) {
@@ -18,13 +15,17 @@ const uploadImage = asyncHandler(async (req, res) => {
       }
   
       const image = await uploadOnCloudinary(imageLocalPath);
+      console.log('Image URL:', image.url);
   
-
+ 
   
-      return res.status(200).json(new ApiResponse(200, image, 'Image added Successfully'));
+      return res.status(200).json({
+        success : true ,
+        message : "Image uploaded successfully",
+        URL : image.url
+      });
     } catch (error) {
       console.error('Error:', error);
       return res.status(500).json({ message: 'Internal Server Error' });
     }
   });
-  
