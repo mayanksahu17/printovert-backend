@@ -1,22 +1,14 @@
 # Routes 
 
-http://8080/api/v1/users/login
-http://8080/api/v1/users/refresh-token
-http://8080/api/v1/users/change-password
-http://8080/api/v1/users/login
-http://8080/api/v1/users/login
-http://8080/api/v1/users/login
-http://8080/api/v1/users/login
-http://8080/api/v1/users/login
 
 
 
  
-router.route('/ 
-router.route('/login').post(loginUser)
+- router.route('/ 
+- router.route('/login').post(loginUser)
 
 
-// secured Routes 
+# secured Routes 
 router.route('/logout').post(verifyJWT , logoutUser)
 
 router.route("/refresh-token").post(refreshAccessToken)
@@ -58,24 +50,3 @@ router.route("/history").get(verifyJWT,getWatchHistory)
 
 
 
-
-for rgister // Post method
-data : 
-{
-"fullName" : "testuser1",
-"email" : "testuser1@gmail.com",
-"username" : "user1",
-"password" : "user1"
-"phoneNumber" : "457855552"
-}
-
-for login post method 
-{
-"email" : "testuser1@gmail.com",
-"username" : "user1",
-"password" : "user1"
-}
-
-to get all images 
-http://localhost:8000/api/v1/users/all-image/659963e03ecc5b7cdbbbb860
-    // "dev": "nodemon -r dotenv/config --experimental-json-modules src/server.js",

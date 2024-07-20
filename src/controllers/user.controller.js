@@ -251,7 +251,7 @@ const createOrder = asyncHandler(async(req,res)=>{
     image: Image.url,
     color: req.body.color,
     brand:  req.body.brand,
-    category: req.body.category,
+    category: req.body.category,///
     description: req.body.description,
     price: req.body.price,
   } 
